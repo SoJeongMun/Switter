@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from '../routes/Home'
-import Auth from '../routes/Auth'
+import Home from 'routes/Home'
+import Auth from 'routes/Auth'
 // import EditProfile from '../routes/EditProfile'
 // import Profile from '../routes/Profile'
 

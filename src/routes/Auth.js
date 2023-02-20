@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { authService } from '../myBase'
+import { authService } from 'myBase'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
 function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [newAccount] = useState(true)
+  const [newAccount, setNewAccount] = useState('')
 
   const onChange = (e) => {
     // const { name, value } = e.target
@@ -20,21 +20,39 @@ function Auth() {
   const onSubmit = async (e) => {
     e.preventDefault()
     try {
-      let res
-      if (newAccount) {
-        res = await createUserWithEmailAndPassword(authService, email, password)
-      } else {
-        res = await signInWithEmailAndPassword(authService, email, password)
+      const regExp =
+        // eslint-disable-next-line
+        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+      if (!regExp.test(email)) {
+        alert('유효한 이메일 양식이 아닙니다.')
+      } else if (password.length < 6) {
+        alert('최소 6자리 이상의 비밀번호를 입력해주세요.')
       }
-      console.log(res)
+      if (newAccount) {
+        const res = await createUserWithEmailAndPassword(
+          authService,
+          email,
+          password,
+        )
+        console.log(res)
+      } else {
+        const res = await signInWithEmailAndPassword(
+          authService,
+          email,
+          password,
+        )
+        console.log(res)
+      }
     } catch (err) {
       console.log(err.message)
     }
   }
 
+  const toggleBtn = () => setNewAccount((prev) => !prev)
+
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input
           name='email'
           type='text'
@@ -53,11 +71,14 @@ function Auth() {
         />
         <input
           type='submit'
-          value={newAccount ? 'Create Account' : 'Log In'}
+          value={newAccount ? 'Create Account' : 'sign In'}
           required
           onSubmit={onSubmit}
         />
       </form>
+      <button onClick={toggleBtn}>
+        {newAccount ? 'Sign In' : 'Create Account'}
+      </button>
       <div>
         <button>Continue with Google</button>
         <button>Continue with GitHub</button>
