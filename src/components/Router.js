@@ -7,7 +7,7 @@ import Nav from 'components/Nav'
 function Router({ isLogin }) {
   return (
     <BrowserRouter>
-      {isLogin && Nav}
+      {isLogin && <Nav />}
       <Routes>
         {isLogin ? (
           <>
