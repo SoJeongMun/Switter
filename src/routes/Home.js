@@ -60,8 +60,8 @@ function Home({ userObj }) {
         {sweets.map(({ id, text, creator }) => (
           <Sweet
             key={id}
+            id={id}
             txt={text}
-            userObj={userObj}
             txtOwner={creator === userObj.uid}
           />
         ))}
