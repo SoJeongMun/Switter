@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { db } from 'myBase'
+import { db, storage } from 'myBase'
 import {
   addDoc,
   collection,
@@ -9,7 +9,6 @@ import {
   orderBy,
 } from 'firebase/firestore'
 import { v4 } from 'uuid'
-import { storage } from 'myBase'
 import { ref, getDownloadURL, uploadString } from '@firebase/storage'
 import Sweet from 'components/Sweet'
 
@@ -31,21 +30,15 @@ function Home({ userObj }) {
 
   const onSubmitSweet = async (e) => {
     e.preventDefault()
-    //트윗할 때 텍스트만 입력시 이미지 url ""로 비워두기 위함
     let attachmentUrl = ''
     try {
-      //이미지 첨부하지 않고 텍스트만 올리고 싶을 때도 있기 때문에 if문 사용
       if (attachment !== '') {
-        //파일 경로 참조 만들기
-        // 'data_url' === reader.readAsDataURL(fileInfo)
         const attachmentRef = ref(storage, `${userObj.uid}/${v4()}`)
-        //storage 참조 경로로 파일 업로드 하기
         const attachmentUpload = await uploadString(
           attachmentRef,
           attachment,
           'data_url',
         )
-        //storage에 있는 파일 URL로 다운로드 받기
         attachmentUrl = await getDownloadURL(attachmentUpload.ref)
       }
       const doc = await addDoc(collection(db, 'sweets'), {
@@ -111,7 +104,6 @@ function Home({ userObj }) {
               height='120px'
               alt='thumbnail'
             />
-            {/* infinite-loop re-rendering 방지 */}
             <button onClick={onClickClear}>Delete</button>
           </div>
         )}
