@@ -1,16 +1,19 @@
-import { db } from 'myBase'
-import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
 import { useState } from 'react'
+import { db, storage } from 'myBase'
+import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { ref, deleteObject } from '@firebase/storage'
 
-function Sweet({ id, txt, txtOwner }) {
+function Sweet({ id, txt, txtOwner, img }) {
   const sweetTxtRef = doc(db, 'sweets', `${id}`)
   const [editBtn, setEditBtn] = useState(false)
   const [editSweet, setEditSweet] = useState(txt)
 
   const onDelete = async () => {
+    const urlRef = ref(storage, img)
     const accept = window.confirm('정말로 스윗을 삭제하시겠습니까?')
     if (accept) {
       await deleteDoc(sweetTxtRef)
+      await deleteObject(urlRef)
     }
   }
   const toggleEditBtn = () => {
@@ -41,6 +44,9 @@ function Sweet({ id, txt, txtOwner }) {
       ) : (
         <>
           <h3>{txt}</h3>
+          {img && (
+            <img src={img} width='120px' height='120px' alt='thumbnail' />
+          )}
           {txtOwner && (
             <>
               <button onClick={onDelete}>Delete</button>
