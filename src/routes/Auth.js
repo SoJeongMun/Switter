@@ -8,7 +8,7 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth'
 
-function Auth() {
+export default function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [newAccount, setNewAccount] = useState('')
@@ -107,5 +107,3 @@ function Auth() {
     </div>
   )
 }
-
-export default Auth

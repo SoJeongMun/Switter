@@ -1,7 +1,7 @@
 import { authService } from 'myBase'
 import { useNavigate } from 'react-router-dom'
 
-function Profile() {
+export default function Profile() {
   const navigate = useNavigate()
   const onLogOut = () => {
     authService.signOut()
@@ -13,5 +13,3 @@ function Profile() {
     </>
   )
 }
-
-export default Profile
