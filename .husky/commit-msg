@@ -26,7 +26,3 @@
 #     info "$message"
 #     exit 1
 #   fi
-  
-
-
-yarn commitlint --edit $1

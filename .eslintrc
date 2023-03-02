@@ -20,6 +20,7 @@
     "arrow-body-style": "error",
     "prefer-arrow-callback": "off",
     "no-var": "error",
+    "no-console": "off",
     "no-dupe-keys": "error",
     "react/prop-types": "off",
     "prettier/prettier": "error",
