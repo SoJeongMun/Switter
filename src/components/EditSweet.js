@@ -3,7 +3,7 @@ import { db, storage } from 'myBase'
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
 import { ref, deleteObject } from '@firebase/storage'
 
-function Sweet({ id, txt, txtOwner, img }) {
+export default function EditSweet({ id, txt, txtOwner, img }) {
   const sweetTxtRef = doc(db, 'sweets', `${id}`)
   const [isEdit, setIsEdit] = useState(false)
   const [editSweet, setEditSweet] = useState(txt)
@@ -58,5 +58,3 @@ function Sweet({ id, txt, txtOwner, img }) {
     </>
   )
 }
-
-export default Sweet
