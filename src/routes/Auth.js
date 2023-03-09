@@ -7,6 +7,8 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
 } from 'firebase/auth'
+import google from 'assets/images/google.png'
+import github from 'assets/images/github.png'
 
 export default function Auth() {
   const [email, setEmail] = useState('')
@@ -68,7 +70,7 @@ export default function Auth() {
   }
 
   return (
-    <div>
+    <div className='login-form'>
       <form onSubmit={onSubmit}>
         <input
           name='email'
@@ -77,6 +79,7 @@ export default function Auth() {
           required
           value={email}
           onChange={onChange}
+          className='email'
         />
         <input
           name='pssword'
@@ -85,23 +88,28 @@ export default function Auth() {
           required
           value={password}
           onChange={onChange}
+          className='password'
         />
         <input
           type='submit'
-          value={newAccount ? 'Create Account' : 'sign In'}
+          value={newAccount ? 'Create Account' : 'Sign In'}
           required
           onSubmit={onSubmit}
+          className='login-btn'
         />
       </form>
-      <button onClick={toggleBtn}>
-        {newAccount ? 'Sign In' : 'Create Account'}
-      </button>
-      <div>
+      <div className='new-account'>
+        <span className='desc'>기존 회원이 아니신가요?</span>
+        <button onClick={toggleBtn} className='toggle-btn'>
+          {newAccount ? 'Sign In' : 'Create Account'}
+        </button>
+      </div>
+      <div className='provider'>
         <button name='google' onClick={onClickSocial}>
-          Continue with Google
+          <img src={google} alt='google' />
         </button>
         <button name='github' onClick={onClickSocial}>
-          Continue with GitHub
+          <img src={github} alt='google' />
         </button>
       </div>
     </div>
