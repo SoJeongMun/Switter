@@ -5,7 +5,7 @@ import { ref, deleteObject } from '@firebase/storage'
 
 function Sweet({ id, txt, txtOwner, img }) {
   const sweetTxtRef = doc(db, 'sweets', `${id}`)
-  const [editBtn, setEditBtn] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
   const [editSweet, setEditSweet] = useState(txt)
 
   const onDelete = async () => {
@@ -17,7 +17,7 @@ function Sweet({ id, txt, txtOwner, img }) {
     }
   }
   const toggleEditBtn = () => {
-    setEditBtn((prev) => !prev)
+    setIsEdit((prev) => !prev)
   }
   const onChangeEdit = ({ target: { value } }) => {
     setEditSweet(value)
@@ -25,12 +25,12 @@ function Sweet({ id, txt, txtOwner, img }) {
   const onSubmitEdit = async (e) => {
     e.preventDefault()
     await updateDoc(sweetTxtRef, { text: editSweet })
-    setEditBtn(false)
+    setIsEdit(false)
   }
 
   return (
     <>
-      {editBtn ? (
+      {isEdit ? (
         <form onSubmit={onSubmitEdit}>
           <input
             value={editSweet}

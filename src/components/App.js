@@ -19,11 +19,16 @@ function App() {
     })
   }, [])
 
+  const refreshUser = () => {
+    const user = authService.currentUser
+    setUserObj({ ...user })
+  }
+
   const madeDate = new Date().getFullYear()
   return (
     <>
       {init ? (
-        <Router isLogin={isLogin} userObj={userObj} />
+        <Router isLogin={isLogin} userObj={userObj} refreshUser={refreshUser} />
       ) : (
         'initializing...'
       )}

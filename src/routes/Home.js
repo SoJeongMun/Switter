@@ -12,7 +12,7 @@ import { v4 } from 'uuid'
 import { ref, getDownloadURL, uploadString } from '@firebase/storage'
 import Sweet from 'components/Sweet'
 
-function Home({ userObj }) {
+export default function Home({ userObj }) {
   const [sweet, setSweet] = useState('')
   const [sweets, setSweets] = useState([])
   const [attachment, setAttachment] = useState('')
@@ -122,5 +122,3 @@ function Home({ userObj }) {
     </>
   )
 }
-
-export default Home
