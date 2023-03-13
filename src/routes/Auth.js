@@ -15,7 +15,7 @@ const FormBox = styled.div`
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 20lvh;
   h2 {
     font-size: 20px;
     font-weight: bold;
