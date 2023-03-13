@@ -1,7 +1,6 @@
 import Router from './Router'
 import { useEffect, useState } from 'react'
 import { authService } from 'myBase'
-import 'assets/Style.css'
 
 function App() {
   const [init, setInit] = useState(false)
@@ -25,7 +24,7 @@ function App() {
     setUserObj({ ...user })
   }
 
-  const madeDate = new Date().getFullYear()
+  // const madeDate = new Date().getFullYear()
   return (
     <div className='container'>
       {init ? (
@@ -33,7 +32,7 @@ function App() {
       ) : (
         'initializing...'
       )}
-      <footer>&copy; made {madeDate} </footer>
+      {/* <Footer>&copy; made {madeDate} </Footer> */}
     </div>
   )
 }
