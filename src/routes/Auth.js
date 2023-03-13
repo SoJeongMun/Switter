@@ -20,6 +20,9 @@ const FormBox = styled.div`
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 30px;
+    span {
+      color: #7d82b8;
+    }
   }
 `
 const Form = styled.form`
@@ -27,10 +30,9 @@ const Form = styled.form`
   flex-flow: column wrap;
   align-items: center;
 `
-const Provider = styled.button`
+const BasicBtn = styled.button`
   width: 300px;
   height: 40px;
-  min-width: min-content;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -44,9 +46,8 @@ const Provider = styled.button`
     margin-right: 5px;
   }
 `
-const LoginInput = styled(Provider)`
+const LoginInput = styled(BasicBtn)`
   text-align: center;
-  box-sizing: border-box;
   background: ${(props) => props.isSubmitBg || 'white'};
   color: ${(props) => props.isSubmitColor || '#000'};
 `
@@ -58,7 +59,7 @@ const NewAccount = styled.div`
   }
   button {
     font-weight: bold;
-    color: #f5918f;
+    color: #7d82b8;
   }
 `
 const Deco = styled.div`
@@ -134,16 +135,18 @@ export default function Auth() {
 
   return (
     <FormBox>
-      <h2>Switter에 로그인하기</h2>
+      <h2>
+        <span>Switter</span>에 로그인하기
+      </h2>
       <div>
-        <Provider name='google' onClick={onClickSocial}>
+        <BasicBtn name='google' onClick={onClickSocial}>
           <img src={google} alt='google' />
           <span>Google 계정으로 로그인</span>
-        </Provider>
-        <Provider name='github' onClick={onClickSocial}>
+        </BasicBtn>
+        <BasicBtn name='github' onClick={onClickSocial}>
           <img src={github} alt='google' />
           <span>Github 계정으로 로그인</span>
-        </Provider>
+        </BasicBtn>
       </div>
       <Deco>
         <div></div>
@@ -175,7 +178,7 @@ export default function Auth() {
           value={newAccount ? '가입하기' : '로그인'}
           required
           onSubmit={onSubmit}
-          isSubmitBg='#121212'
+          isSubmitBg='#7d82b8'
           isSubmitColor='white'
         />
       </Form>

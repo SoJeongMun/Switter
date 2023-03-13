@@ -1,20 +1,15 @@
 import Router from './Router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { authService } from 'myBase'
 
 function App() {
   const [init, setInit] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
   const [userObj, setUserObj] = useState(null)
+  const isLogin = useMemo(() => userObj !== null, [userObj])
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      if (user) {
-        setIsLogin(true)
-        setUserObj(user)
-      } else {
-        setIsLogin(false)
-      }
+      setUserObj(user)
       setInit(true)
     })
   }, [])
@@ -24,7 +19,6 @@ function App() {
     setUserObj({ ...user })
   }
 
-  // const madeDate = new Date().getFullYear()
   return (
     <div className='container'>
       {init ? (
@@ -32,7 +26,6 @@ function App() {
       ) : (
         'initializing...'
       )}
-      {/* <Footer>&copy; made {madeDate} </Footer> */}
     </div>
   )
 }

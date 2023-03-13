@@ -39,7 +39,7 @@ export default function WriteSweets({ userObj }) {
     setSweet(value)
   }
 
-  const onFileChange = (e) => {
+  const onChangeFile = (e) => {
     const {
       target: { files },
     } = e
@@ -73,7 +73,7 @@ export default function WriteSweets({ userObj }) {
         <input
           type='file'
           accept='image/*'
-          onChange={onFileChange}
+          onChange={onChangeFile}
           ref={fileInput}
         />
         {attachment && (
