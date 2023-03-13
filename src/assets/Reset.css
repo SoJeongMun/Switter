@@ -17,14 +17,14 @@
   cursor: default;
   line-height: 1.5;
   overflow-wrap: break-word;
-  word-break:break-word;
+  word-break: break-word;
   -moz-tab-size: 4;
   tab-size: 4;
 }
-html,
+/* html,
 body {
   height: 100%;
-}
+} */
 img,
 picture,
 video,
@@ -45,4 +45,9 @@ a {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+input {
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }

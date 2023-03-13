@@ -1,34 +1,32 @@
 import Router from './Router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { authService } from 'myBase'
 
 function App() {
   const [init, setInit] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
   const [userObj, setUserObj] = useState(null)
+  const isLogin = useMemo(() => userObj !== null, [userObj])
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      if (user) {
-        setIsLogin(true)
-        setUserObj(user)
-      } else {
-        setIsLogin(false)
-      }
+      setUserObj(user)
       setInit(true)
     })
   }, [])
 
-  const madeDate = new Date().getFullYear()
+  const refreshUser = () => {
+    const user = authService.currentUser
+    setUserObj({ ...user })
+  }
+
   return (
-    <>
+    <div className='container'>
       {init ? (
-        <Router isLogin={isLogin} userObj={userObj} />
+        <Router isLogin={isLogin} userObj={userObj} refreshUser={refreshUser} />
       ) : (
         'initializing...'
       )}
-      <footer>&copy; made {madeDate} </footer>
-    </>
+    </div>
   )
 }
 
