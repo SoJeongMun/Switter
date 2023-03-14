@@ -1,4 +1,18 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Gnb = styled.nav`
+  height: 100lvh;
+  padding: 60px 30px 0px 60px;
+  box-sizing: border-box;
+  text-align: right;
+  ul {
+    list-style-type: none;
+    li {
+      padding-bottom: 20px;
+    }
+  }
+`
 
 function Nav({ userObj }) {
   const navigate = useNavigate()
@@ -10,12 +24,12 @@ function Nav({ userObj }) {
     navigate('/profile')
   }
   return (
-    <nav>
+    <Gnb>
       <ul>
-        <li onClick={goHome}>Home</li>
-        <li onClick={goProfile}>{userObj.displayName}의 Profile</li>
+        <li onClick={goHome}>홈</li>
+        <li onClick={goProfile}>{userObj.displayName}의 프로필</li>
       </ul>
-    </nav>
+    </Gnb>
   )
 }
 export default Nav

@@ -3,6 +3,38 @@ import { db, storage } from 'myBase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { v4 } from 'uuid'
 import { ref, getDownloadURL, uploadString } from '@firebase/storage'
+import styled from 'styled-components'
+
+const FormBox = styled.form`
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  width: 600px;
+  height: 120px;
+  margin-bottom: 20px;
+`
+const InputBox = styled.input`
+  padding: 0 30px;
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`
+const SubmitBtn = styled.input.attrs({ type: 'submit' })`
+  background: #7d82b8;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+`
+const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-sizing: border-box;
+`
 
 export default function WriteSweets({ userObj }) {
   const [sweet, setSweet] = useState('')
@@ -61,21 +93,23 @@ export default function WriteSweets({ userObj }) {
 
   return (
     <>
-      <form onSubmit={onSubmitSweet}>
-        <input
+      <FormBox onSubmit={onSubmitSweet}>
+        <InputBox
           type='text'
-          placeholder="What's on your mind?"
+          placeholder='무슨 일이 일어나고 있나요?'
           maxLength={140}
           value={sweet}
           onChange={onChangeSweet}
         />
-        <input type='submit' value='Sweet' />
-        <input
-          type='file'
-          accept='image/*'
-          onChange={onChangeFile}
-          ref={fileInput}
-        />
+        <FlexRow>
+          <input
+            type='file'
+            accept='image/*'
+            onChange={onChangeFile}
+            ref={fileInput}
+          />
+          <SubmitBtn type='submit' value='Sweet' />
+        </FlexRow>
         {attachment && (
           <div>
             <img
@@ -87,7 +121,7 @@ export default function WriteSweets({ userObj }) {
             <button onClick={onClickClear}>Delete</button>
           </div>
         )}
-      </form>
+      </FormBox>
     </>
   )
 }
