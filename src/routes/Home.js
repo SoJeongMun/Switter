@@ -9,7 +9,7 @@ const FlexWrap = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   padding: 60px 0 0 0;
   box-sizing: border-box;
   border-right: 1px solid #eee;

@@ -3,6 +3,8 @@ import { db, storage } from 'myBase'
 import { doc, deleteDoc, updateDoc } from 'firebase/firestore'
 import { ref, deleteObject } from '@firebase/storage'
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const SweetBox = styled.div`
   width: 600px;
@@ -13,11 +15,17 @@ const SweetBox = styled.div`
     padding: 0 30px;
     box-sizing: border-box;
   }
+  h3 {
+    margin-bottom: 15px;
+  }
   img {
     width: 50%;
   }
   button {
     margin: 20px 0 0 30px;
+    &:last-child {
+      margin-left: 20px;
+    }
   }
 `
 
@@ -65,8 +73,12 @@ export default function EditSweet({ id, txt, txtOwner, img }) {
           {img && <img src={img} alt='thumbnail' />}
           {txtOwner && (
             <>
-              <button onClick={onDelete}>Delete</button>
-              <button onClick={toggleEditBtn}>Edit</button>
+              <button onClick={onDelete}>
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+              <button onClick={toggleEditBtn}>
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </button>
             </>
           )}
         </SweetBox>
