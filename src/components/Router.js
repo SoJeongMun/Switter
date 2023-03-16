@@ -4,15 +4,18 @@ import Auth from 'routes/Auth'
 import Profile from 'routes/Profile'
 import Nav from 'components/Nav'
 
-function Router({ isLogin, userObj }) {
+function Router({ isLogin, userObj, refreshUser }) {
   return (
     <BrowserRouter>
-      {isLogin && <Nav />}
+      {isLogin && <Nav userObj={userObj} />}
       <Routes>
         {isLogin ? (
           <>
             <Route path='/' element={<Home userObj={userObj} />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route
+              path='/profile'
+              element={<Profile userObj={userObj} refreshUser={refreshUser} />}
+            />
           </>
         ) : (
           <Route path='/' element={<Auth />} />

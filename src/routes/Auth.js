@@ -7,8 +7,75 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
 } from 'firebase/auth'
+import google from 'assets/images/google.png'
+import github from 'assets/images/github.png'
+import styled from 'styled-components'
 
-function Auth() {
+const FormBox = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin-top: 20lvh;
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    span {
+      color: #7d82b8;
+    }
+  }
+`
+const Form = styled.form`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+`
+const BasicBtn = styled.button`
+  width: 300px;
+  height: 40px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dadce0;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-top: 15px;
+  img {
+    width: 20px;
+    margin-right: 5px;
+  }
+`
+const LoginInput = styled(BasicBtn)`
+  text-align: center;
+  background: ${(props) => props.isSubmitBg || 'white'};
+  color: ${(props) => props.isSubmitColor || '#000'};
+`
+const NewAccount = styled.div`
+  margin-top: 40px;
+  font-size: 15px;
+  span {
+    margin-right: 8px;
+  }
+  button {
+    font-weight: bold;
+    color: #7d82b8;
+  }
+`
+const Deco = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  div {
+    width: 110px;
+    border: 1px solid #dadce0;
+  }
+  p {
+    margin: 0 15px;
+  }
+`
+
+export default function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [newAccount, setNewAccount] = useState('')
@@ -57,7 +124,6 @@ function Auth() {
     const {
       target: { name },
     } = e
-    // firebase의 provider = 소셜로그인 제공 업체
     let provider
     if (name === 'google') {
       provider = new GoogleAuthProvider()
@@ -68,9 +134,28 @@ function Auth() {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
+    <FormBox>
+      <h2>
+        <span>Switter</span>에 로그인하기
+      </h2>
+      <div>
+        <BasicBtn name='google' onClick={onClickSocial}>
+          <img src={google} alt='google' />
+          <span>Google 계정으로 로그인</span>
+        </BasicBtn>
+        <BasicBtn name='github' onClick={onClickSocial}>
+          <img src={github} alt='google' />
+          <span>Github 계정으로 로그인</span>
+        </BasicBtn>
+      </div>
+      <Deco>
+        <div></div>
+        <p>또는</p>
+        <div></div>
+      </Deco>
+      <Form onSubmit={onSubmit}>
+        <LoginInput
+          as='input'
           name='email'
           type='text'
           placeholder='Email'
@@ -78,7 +163,8 @@ function Auth() {
           value={email}
           onChange={onChange}
         />
-        <input
+        <LoginInput
+          as='input'
           name='pssword'
           type='password'
           placeholder='Password'
@@ -86,26 +172,24 @@ function Auth() {
           value={password}
           onChange={onChange}
         />
-        <input
+        <LoginInput
+          as='input'
           type='submit'
-          value={newAccount ? 'Create Account' : 'sign In'}
+          value={newAccount ? '가입하기' : '로그인'}
           required
           onSubmit={onSubmit}
+          isSubmitBg='#7d82b8'
+          isSubmitColor='white'
         />
-      </form>
-      <button onClick={toggleBtn}>
-        {newAccount ? 'Sign In' : 'Create Account'}
-      </button>
-      <div>
-        <button name='google' onClick={onClickSocial}>
-          Continue with Google
+      </Form>
+      <NewAccount>
+        <span>
+          {newAccount ? '이미 회원이신가요?' : '아직 회원이 아니신가요?'}
+        </span>
+        <button onClick={toggleBtn}>
+          {newAccount ? '로그인' : '가입하기'}
         </button>
-        <button name='github' onClick={onClickSocial}>
-          Continue with GitHub
-        </button>
-      </div>
-    </div>
+      </NewAccount>
+    </FormBox>
   )
 }
-
-export default Auth
