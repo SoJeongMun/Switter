@@ -18,29 +18,21 @@ const FormBox = styled.form`
   div.img-box {
     margin: 20px 0 20px 30px;
     position: relative;
-    button{
-        position: absolute;
-        top: 10px;
-        left: 10px;
-      }
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
     }
   }
 `
 const SweetBox = styled.textarea`
+  width: 100%;
   padding: 0 30px;
   box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;
   overflow: hidden;
-  width: 100%;
-  outline: none;
-  border: none;
-  resize: none;
-  &:focus {
-    outline: none;
-    border: none;
-  }
 `
 const SubmitBtn = styled.input.attrs({ type: 'submit' })`
   background: #7d82b8;
@@ -56,27 +48,9 @@ const FlexRow = styled.div`
   padding: 0 30px;
   box-sizing: border-box;
 `
-
 const ImageFile = styled.div`
   display: flex;
   align-items: center;
-  label {
-    display: inline-block;
-    font-size: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-  input[type='file'] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
 `
 
 export default function WriteSweets({ userObj }) {

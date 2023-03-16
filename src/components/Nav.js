@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Gnb = styled.nav`
-  height: 100lvh;
   padding: 60px 30px 0px 60px;
   box-sizing: border-box;
   text-align: right;
@@ -27,7 +26,7 @@ function Nav({ userObj }) {
     <Gnb>
       <ul>
         <li onClick={goHome}>홈</li>
-        <li onClick={goProfile}>{userObj.displayName}의 프로필</li>
+        <li onClick={goProfile}>{userObj.displayName}</li>
       </ul>
     </Gnb>
   )
