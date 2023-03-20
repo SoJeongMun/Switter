@@ -3,6 +3,55 @@ import { db, storage } from 'myBase'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { v4 } from 'uuid'
 import { ref, getDownloadURL, uploadString } from '@firebase/storage'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components'
+import picture from '../assets/images/picture.png'
+
+const FormBox = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 600px;
+  min-height: 100px;
+  margin-bottom: 20px;
+  div.img-box {
+    margin: 20px 0 20px 30px;
+    position: relative;
+    button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+  }
+`
+const SweetBox = styled.textarea`
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+`
+const SubmitBtn = styled.input.attrs({ type: 'submit' })`
+  background: #7d82b8;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+`
+const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-sizing: border-box;
+`
+const ImageFile = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 export default function WriteSweets({ userObj }) {
   const [sweet, setSweet] = useState('')
@@ -61,33 +110,42 @@ export default function WriteSweets({ userObj }) {
 
   return (
     <>
-      <form onSubmit={onSubmitSweet}>
-        <input
-          type='text'
-          placeholder="What's on your mind?"
-          maxLength={140}
-          value={sweet}
-          onChange={onChangeSweet}
-        />
-        <input type='submit' value='Sweet' />
-        <input
-          type='file'
-          accept='image/*'
-          onChange={onChangeFile}
-          ref={fileInput}
-        />
-        {attachment && (
-          <div>
-            <img
-              src={attachment}
-              width='120px'
-              height='120px'
-              alt='thumbnail'
+      <FormBox onSubmit={onSubmitSweet}>
+        <div>
+          <SweetBox
+            type='text'
+            placeholder='무슨 일이 일어나고 있나요?'
+            maxLength='140'
+            value={sweet}
+            onChange={onChangeSweet}
+          />
+          {attachment && (
+            <div className='img-box'>
+              <img src={attachment} alt='thumbnail' />
+              <button onClick={onClickClear}>
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </div>
+          )}
+        </div>
+        <FlexRow>
+          <ImageFile>
+            <label htmlFor='ex_file'>
+              <div>
+                <img src={picture} alt='icon' width='20' height='20' />
+              </div>
+            </label>
+            <input
+              type='file'
+              id='ex_file'
+              accept='image/*'
+              onChange={onChangeFile}
+              ref={fileInput}
             />
-            <button onClick={onClickClear}>Delete</button>
-          </div>
-        )}
-      </form>
+          </ImageFile>
+          <SubmitBtn type='submit' value='Sweet' />
+        </FlexRow>
+      </FormBox>
     </>
   )
 }

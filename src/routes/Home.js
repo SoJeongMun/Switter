@@ -3,6 +3,18 @@ import { db } from 'myBase'
 import { collection, query, onSnapshot, orderBy } from 'firebase/firestore'
 import EditSweet from 'components/EditSweet'
 import WriteSweets from 'components/WriteSweets'
+import styled from 'styled-components'
+
+const FlexWrap = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  height: 100vh;
+  padding: 60px 0 0 0;
+  box-sizing: border-box;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee;
+`
 
 export default function Home({ userObj }) {
   const [sweets, setSweets] = useState([])
@@ -19,7 +31,7 @@ export default function Home({ userObj }) {
   }, [])
 
   return (
-    <>
+    <FlexWrap>
       <div>
         <WriteSweets userObj={userObj} />
       </div>
@@ -34,6 +46,6 @@ export default function Home({ userObj }) {
           />
         ))}
       </div>
-    </>
+    </FlexWrap>
   )
 }
