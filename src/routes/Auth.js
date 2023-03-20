@@ -78,7 +78,7 @@ const Deco = styled.div`
 export default function Auth() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [newAccount, setNewAccount] = useState('')
+  const [newAccount, setNewAccount] = useState(false)
 
   const onChange = (e) => {
     // const { name, value } = e.target
@@ -165,7 +165,7 @@ export default function Auth() {
         />
         <LoginInput
           as='input'
-          name='pssword'
+          name='password'
           type='password'
           placeholder='Password'
           required

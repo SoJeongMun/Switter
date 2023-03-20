@@ -51,7 +51,7 @@ const SweetBox = styled.div`
 
 export default function Profile({ userObj, refreshUser }) {
   const [displayName, setDisplayName] = useState(userObj.displayName)
-  const [mySweet, setMySweet] = useState()
+  const [mySweet, setMySweet] = useState([])
 
   const navigate = useNavigate()
   const onClickLogOut = () => {
@@ -66,10 +66,11 @@ export default function Profile({ userObj, refreshUser }) {
       orderBy('createdAt', 'desc'),
     )
     const queryResult = await getDocs(q)
-    queryResult.forEach((doc) => {
-      console.log(doc.data())
-    })
-    setMySweet(queryResult.docs.map((doc) => doc.data()))
+    const mySweets = queryResult.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }))
+    setMySweet(mySweets)
   }
   useEffect(() => {
     getMySweets()
