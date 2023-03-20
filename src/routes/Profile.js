@@ -9,11 +9,44 @@ const FlexWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 600px;
   height: 100vh;
   padding: 60px 0 0 0;
   box-sizing: border-box;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee;
+`
+const ProfileBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  min-height: 100px;
+  padding: 0px 30px 30px 30px;
+  box-sizing: border-box;
+`
+const SweetBox = styled.div`
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+  border-top: 1px solid #eee;
+  h3,
+  img {
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+  h3 {
+    margin-bottom: 15px;
+  }
+  img {
+    width: 50%;
+  }
+  button {
+    margin: 20px 0 0 30px;
+    &:last-child {
+      margin-left: 20px;
+    }
+  }
 `
 
 export default function Profile({ userObj, refreshUser }) {
@@ -59,27 +92,29 @@ export default function Profile({ userObj, refreshUser }) {
   }
   return (
     <FlexWrap>
-      <h2>{userObj.displayName}</h2>
-      <form onSubmit={onSubmitName}>
-        <input
-          type='text'
-          placeholder='Display Name...'
-          value={displayName}
-          onChange={onChangeName}
-        />
-        <input type='submit' value='Update Profile' />
-      </form>
+      <ProfileBox>
+        <h2>{userObj.displayName}</h2>
+        <form onSubmit={onSubmitName}>
+          <input
+            type='text'
+            // placeholder='Display Name...'
+            // value={displayName}
+            onChange={onChangeName}
+          />
+          <input type='submit' value='Update Profile' />
+        </form>
+        <button onClick={onClickLogOut}>Log Out</button>
+      </ProfileBox>
       {mySweet && (
         <>
           {mySweet.map(({ text, attachmentUrl }) => (
-            <div>
+            <SweetBox>
               <h3>{text}</h3>
               {attachmentUrl && <img src={attachmentUrl} alt='sweetImg' />}
-            </div>
+            </SweetBox>
           ))}
         </>
       )}
-      <button onClick={onClickLogOut}>Log Out</button>
     </FlexWrap>
   )
 }
